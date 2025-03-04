@@ -126,3 +126,116 @@ SOURCE_FOLDER = "C:\User\Documents"  # 会引发路径错误
 Fork仓库并提交PR
 完善单元测试
 更新多语言文档
+
+
+
+📌 Core Features
+Multi-Format Support: Native handling of .docx files with auto-conversion for legacy .doc format
+Format Preservation: Maintain original document formatting including fonts, paragraphs, tables, etc.
+Smart Replacement:
+Case-sensitive matching (auto-detects ALL CAPS/Title Case/Regular case)
+Regular expression support
+Cross-Run content replacement
+Professional Processing:
+Document properties (Title/Subject/Keywords)
+Headers & Footers (Standard/First Page/Odd-Even Pages)
+Hyperlinks and shape texts
+Detailed Reporting:
+Real-time replacement statistics panel
+Comprehensive error logging
+Visualized processing results
+📥 Installation Guide
+Requirements
+Windows OS (with Microsoft Word installed)
+Python 3.7+
+Install Dependencies
+Bash
+pip install python-docx pywin32
+🚀 Quick Start
+Three-Step Workflow
+Create Configuration File
+Create config.py in project root:
+
+Python
+REPLACE_RULES = {
+    "Old Text": "New Text",
+    r"\b\d{11}\b": "[PHONE]"  # Regex example
+}
+
+SOURCE_FOLDER = r"E:\SourceDocs"
+OUTPUT_FOLDER = r"E:\ProcessedDocs"
+Execute Processor
+Bash
+python main.py
+View Results
+Processed documents in output folder
+processing.log generated in root directory
+First-Run Example
+Bash
+# Initial structure
+DocReplacePro/
+├── main.py
+└── config.py
+
+# After execution
+┌──────────────────────────────┬────────┬────────┐
+│         Filename            │ Count  │ Status │
+├──────────────────────────────┼────────┼────────┤
+│ Contract_Final.docx        │   5    │ Success│
+│ Whitepaper_v3.doc          │   12   │ Success│
+└──────────────────────────────┴────────┴────────┘
+⚙ Advanced Configuration
+Project Structure
+ DocReplacePro/
+├── main.py         # Main entry
+├── config.py       # Configuration (required)
+├── processing.log  # Auto-generated log
+└── /output         # Processed documents
+Regex Configuration Example
+Python
+# config.py
+REPLACE_RULES = {
+    # Date masking
+    r"\d{4}-\d{2}-\d{2}": "<DATE>",
+    
+    # Case-preserved brand replacement
+    "OldBrand": "NewBrand",
+    
+    # Multi-level replacement
+    "[Confidential]": "[Approved]",
+    "Draft": "Final"
+}
+📊 Output Details
+Console Display
+ ┌──────────────────────────────┬────────┬────────┐
+│         Filename            │ Count  │ Status │
+├──────────────────────────────┼────────┼────────┤
+│ Contract_Final.docx        │   5    │ Success│
+│ CorruptedFile.doc          │   --   │ Failed │
+└──────────────────────────────┴────────┴────────┘
+Processing Complete: 2 files | Success: 1 | Failed: 1
+Log File Example
+ [2023-10-01 09:00:00] INFO: Processing Contract_Final.docx
+[2023-10-01 09:00:02] SUCCESS: 5 replacements
+[2023-10-01 09:00:05] ERROR: CorruptedFile.doc - File format corrupted
+⚠ Important Notes
+System Requirements:
+Enable Word Macro permissions (File > Options > Trust Center > Macro Settings)
+Recommended: Windows 10/11
+Path Specifications:
+Python
+# Correct format (raw strings)
+SOURCE_FOLDER = r"C:\User\Documents"
+
+# Incorrect format (escape characters)
+SOURCE_FOLDER = "C:\User\Documents"  # Causes path errors
+Security Recommendations:
+Backup original documents before processing
+Perform sensitive operations in virtual machines
+🤝 Contribution
+We welcome contributions through:
+
+Submit issues for bug reports
+Fork repository and submit PRs
+Improve unit tests
+Enhance multilingual documentation
